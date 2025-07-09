@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<body style="text-align: center; padding: 50px;">
+  <h1>Color Sync</h1>
+  <button onclick="connect()">JOIN</button>
+  <script>
+    async function connect() {
+      const device = await navigator.bluetooth.requestDevice({
+        acceptAllDevices: true,
+        optionalServices: ['0000ff00-0000-1000-8000-00805f9b34fb'] // Custom service
+      });
+      const server = await device.gatt.connect();
+      document.body.style.background = "red"; // Changes when ESP32 sends data
+    }
+  </script>
+</body>
